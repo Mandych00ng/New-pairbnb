@@ -1,2 +1,7 @@
 <h1>Static#home</h1>
 <p>Find me in app/views/static/home.html.erb</p>
+<h2>Featured home stays!</h2>
+<% @listings.each do |l| %>
+<%= l.name %>
+<% end %>
+<%= link_to "Create New Listing", new_listing_path %>

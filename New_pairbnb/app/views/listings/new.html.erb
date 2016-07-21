@@ -1,0 +1,8 @@
+<h1>Create a New Listing!</h1>
+<%= form_for(@listing) do |f| %>
+  Property Name: <%= f.text_field :name %><br />
+  Location : <%= f.text_field :location %><br />
+  Price per night : <%= f.text_area :pricing %><br />
+  
+  <%= f.submit %>
+<% end %>

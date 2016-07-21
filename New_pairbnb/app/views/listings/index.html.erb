@@ -1,0 +1,7 @@
+<h1>All Listings<h2>
+<ol><% @listings.each do |l| %>
+<li><%= l.name + "@" + l.location %>
+	<%= l.pricing %>
+</li>
+	<% end %>
+</ol>
