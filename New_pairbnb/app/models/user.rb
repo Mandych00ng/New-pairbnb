@@ -1,4 +1,9 @@
 class User < ActiveRecord::Base
+
+  has_many :listings
+  has_many :reservations
+  
+  mount_uploader :profile_pic, AvatarUploader
   include Clearance::User
 
   has_many :authentications, :dependent => :destroy

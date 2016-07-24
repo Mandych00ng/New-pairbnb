@@ -3,6 +3,7 @@
   Property Name: <%= f.text_field :name %><br />
   Location : <%= f.text_field :location %><br />
   Price per night : <%= f.text_area :pricing %><br />
-  
+  Tags : <%= f.text_field :tag_list %><br />
+  <%= f.file_field :images, multiple: true %>
   <%= f.submit %>
 <% end %>

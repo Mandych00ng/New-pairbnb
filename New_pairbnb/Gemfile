@@ -1,9 +1,15 @@
 source 'https://rubygems.org'
 
+gem 'validates_overlap'
+gem 'fog-aws'
+gem 'fog'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'figaro'
 gem 'clearance'
+gem 'acts-as-taggable-on', '~> 3.4'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'mini_magick'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use postgresql as the database for Active Record

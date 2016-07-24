@@ -1,7 +1,18 @@
+<% form_tag listings_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
 <h1>All Listings<h2>
 <ol><% @listings.each do |l| %>
 <li><%= l.name + "@" + l.location %>
 	<%= l.pricing %>
+	<%= l.tag_list %>
+	<% l.images.each do |image| %>
+	<%= image_tag(image) %>
+	<% end %>
 </li>
 	<% end %>
 </ol>

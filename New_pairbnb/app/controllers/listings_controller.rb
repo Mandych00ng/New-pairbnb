@@ -1,11 +1,13 @@
 class ListingsController < ApplicationController
+
 	def index
-			@listings = Listing.all
-		
+		@search_results = Listing.search(params[:search])
+		@listings = Listing.all	
 	end
 
 	def show
-		
+		@listing = Listing.find(params[:id])
+		@reservation = Reservation.new
 	end
 
 	def new
@@ -13,7 +15,7 @@ class ListingsController < ApplicationController
 	end
 
 	def create
-		@listing = Listing.new(listing_params)
+		@listing = current_user.listings.new(listing_params)
 		if @listing.save 
 			redirect_to listings_path
 		else
@@ -24,6 +26,6 @@ class ListingsController < ApplicationController
 
 private
 	def listing_params
-		params.require(:listing).permit(:name, :location, :pricing)
+		params.require(:listing).permit(:name,:location, :pricing, :tag_list, {images:[]})
 	end
 end
