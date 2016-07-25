@@ -1,6 +1,10 @@
 <h1><%= @listing.name %></h1>
-<%= @listing.location %>
-<%= image_tag(@listing.images) %>
+<%= @listing.location %><br>
+<p><%= @listing.pricing %> per night</p>
+<% @listing.images.each do |image| %>
+	<%= image_tag(image.medium) %><br>
+<% end %>
+<%= @listing.tag_list %>
 
 <%= form_for(@reservation) do |f| %>
 	<%= f.date_field :start_date %>

@@ -2,7 +2,7 @@ class ListingsController < ApplicationController
 
 	def index
 		@search_results = Listing.search(params[:search])
-		@listings = Listing.all	
+		@listings = Listing.paginate(page: params[:page], per_page: 3)
 	end
 
 	def show

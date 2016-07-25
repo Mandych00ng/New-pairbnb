@@ -5,9 +5,10 @@
   </p>
 <% end %>
 
-<h1>All Listings<h2>
+<h1>All Listings<h2> 
 <ol><% @listings.each do |l| %>
-<li><%= l.name + "@" + l.location %>
+<li><a href="/listings/<%=l.id%>"><%= l.name %></a> 
+	<%= "@" + l.location %>
 	<%= l.pricing %>
 	<%= l.tag_list %>
 	<% l.images.each do |image| %>
@@ -16,3 +17,7 @@
 </li>
 	<% end %>
 </ol>
+
+<div class=apple_pagination>
+	<%= will_paginate @listings %>
+</div>
