@@ -15,7 +15,9 @@ class ReservationsController < ApplicationController
 	def create
 		@reservation = current_user.reservations.new(reservation_params)
 		if @reservation.save
+			ReservationMailer.booking_email(@reservation).deliver_now
 			render :show
+
 		else
 			flash[:notice] = "Dates you chose are occupied, choose again"
 			redirect_to listing_path(@reservation.listing_id) 
