@@ -1,28 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <%= javascript_include_tag 'application' %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true  %>
   <%= csrf_meta_tag %>
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
+  <style>
+    .carousel-inner > .item > img,
+    .carousel-inner > .item > a > img {
+        width: 100%;
+        margin: auto;
+    }
+  </style>
+</head>
+
+<body>
   
-  <div id="header">
+<nav class='menu'>
+  <ul class="active">
     <% if signed_in? -%>
-      <%= button_to t(".sign_out"), sign_out_path, method: :delete %>
+      <%= link_to t(".sign_out"), sign_out_path, method: :delete %>   Welcome, <%= current_user.username %>
     <% else -%>
       <%= link_to t(".sign_in"), sign_in_path %>
     <% end -%>
-  </div>
+  </ul>
+ </nav> 
 
-  <div id="flash">
-    <% flash.each do |key, value| -%>
-      <div id="flash_<%= key %>"><%=h value %></div>
-    <% end %>
-  </div>
 
+
+
+<div id="flash">
+  <% flash.each do |key, value| -%>
+    <div id="flash_<%= key %>"><%=h value %></div>
+  <% end %>
+</div>
+<div class="container-fluid">
   <%= yield %>
+</div>
 </body>
 </html>

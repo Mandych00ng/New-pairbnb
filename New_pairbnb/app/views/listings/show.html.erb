@@ -2,7 +2,7 @@
 <%= @listing.location %><br>
 <p><%= @listing.pricing %> per night</p>
 <% @listing.images.each do |image| %>
-	<%= image_tag(image.medium) %><br>
+	<%= image_tag(image) %><br>
 <% end %>
 <%= @listing.tag_list %>
 

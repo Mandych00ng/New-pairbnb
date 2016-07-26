@@ -5,6 +5,9 @@ Rails.application.routes.draw do
 
   get 'static/index'
 
+
+  resources :users, controller: 'users', only: Clearance.configuration.user_actions
+
   resources :users, only: [:show, :edit, :update, :destroy]
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
   resources :listings
