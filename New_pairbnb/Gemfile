@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'braintree'
 gem 'sidekiq'
 gem 'validates_timeliness'
 gem 'will_paginate', '~> 3.0.5'

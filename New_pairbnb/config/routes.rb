@@ -1,17 +1,14 @@
 Rails.application.routes.draw do
 
-  
   root 'static#home'
-
   get 'static/index'
-
-
   resources :users, controller: 'users', only: Clearance.configuration.user_actions
-
   resources :users, only: [:show, :edit, :update, :destroy]
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
   resources :listings
   resources :reservations
+  resources :payments, only: [:new, :create]
+ 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

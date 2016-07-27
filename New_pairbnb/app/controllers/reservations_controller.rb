@@ -1,11 +1,14 @@
 class ReservationsController < ApplicationController
+
 	def index
 		@reservations = Reservation.find_by(listing_id: params[:listing_id])
 	end
 
 	def show
 		@user = User.find(current_user.id)
-		@reservations = @user.reservations
+	    @client_token = Braintree::ClientToken.generate
+	    @reservation = Reservation.find(params[:id])
+	    @payment = Payment.new
 	end
 
 	def new
@@ -14,12 +17,12 @@ class ReservationsController < ApplicationController
 
 	def create
 		@reservation = current_user.reservations.new(reservation_params)
+		@reservation.price = calculate_price(@reservation) 
 		if @reservation.save
 			ReservationJob.perform_later(@reservation)
-			render :show
-
+			redirect_to @reservation
 		else
-			flash.now[:notice] = "Dates you chose are occupied, choose again"
+			flash[:notice] = "Dates you chose are occupied, choose again"
 			redirect_to listing_path(@reservation.listing_id) 
 		end
 	end
@@ -30,7 +33,7 @@ class ReservationsController < ApplicationController
 
 	def update
 		@reservation = Reservation.find_by(user_id: current_user.id)
-		@update = @reservation.update(update_params)
+		@update = @reservation.update(reservation_params)
 		if @update.save
 			redirect_to reservation_path
 		else
@@ -50,4 +53,10 @@ private
 		params.require(:reservation).permit(:listing_id, :user_id, :start_date, :end_date)
 	end
 
+	def calculate_price(reservation)
+		@start_date = @reservation.start_date
+		@end_date = @reservation.end_date
+		@price = @reservation.listing.pricing
+		return @total = ((@end_date - @start_date)/86400) * @price
+	end
 end
