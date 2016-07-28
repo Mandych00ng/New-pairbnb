@@ -1,8 +1,13 @@
 class ListingsController < ApplicationController
 
 	def index
-		@search_results = Listing.search(params[:search])
-		@listings = Listing.paginate(page: params[:page], per_page: 3)
+		if params[:search].present?
+			Listing.reindex
+			@listings = Listing.search(params[:search], page: params[:page], per_page: 3)
+
+		else
+			@listings = Listing.all.paginate(page: params[:page], per_page: 3)
+		end
 	end
 
 	def show

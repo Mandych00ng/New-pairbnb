@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+gem 'elasticsearch-rails'
+gem 'elasticsearch-model'
+gem 'searchkick'
 gem 'braintree'
 gem 'sidekiq'
 gem 'validates_timeliness'

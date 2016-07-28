@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 
   has_many :listings
   has_many :reservations
+  searchkick
   
   mount_uploader :profile_pic, AvatarUploader
   include Clearance::User

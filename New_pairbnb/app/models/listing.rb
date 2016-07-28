@@ -3,12 +3,15 @@ class Listing < ActiveRecord::Base
 	has_many :reservations
 	acts_as_taggable
 	mount_uploaders :images, ImageUploader
+	searchkick
 
-	def self.search(search)
-	  if search
-	    find(:location, :conditions => ['location LIKE ?', "%#{search}%"])
-	  else
-	    Listing.all
-	  end
-	end
+	def search_data
+    {
+      name: name,
+      location: location,
+      user_id: user,
+      tag_list: tags
+    }
+  end
+
 end
